@@ -2,8 +2,6 @@ import pandas as pd
 import requests
 from matplotlib import pyplot as plt
 
-from resources.data import COWL_NAMES, ENCHANT
-
 world_indexes = "https://github.com/ao-data/ao-bin-dumps/blob/master/formatted/world.json"
 item_indexes = "https://raw.githubusercontent.com/ao-data/ao-bin-dumps/master/formatted/items.json"
 
@@ -47,45 +45,17 @@ level = 3
 # https://west.albion-online-data.com/api/v2/stats/view/T4_BAG,T5_BAG?locations=Caerleon,Bridgewatch&qualities=2
 
 def run_script():
-    tier = "T6"
-    item_list = COWL_NAMES
-    item_query0 = create_item_list(item_list, tier, ENCHANT.get(0))
-    item_query1 = create_item_list(item_list, tier, ENCHANT.get(1))
-    item_query2 = create_item_list(item_list, tier, ENCHANT.get(2))
-    item_query3 = create_item_list(item_list, tier, ENCHANT.get(3))
-
-    average_link0 = f"{main_link}{item_query0}{locations}"
-    average_link1 = f"{main_link}{item_query1}{locations}"
-    average_link2 = f"{main_link}{item_query2}{locations}"
-    average_link3 = f"{main_link}{item_query3}{locations}"
+    average_link0 = f"{main_link}T6_MAIN_FIRESTAFF_KEEPER@1{locations}"
 
     get_average_json0 = create_average_call(average_link0)
-    get_average_json1 = create_average_call(average_link1)
-    get_average_json2 = create_average_call(average_link2)
-    get_average_json3 = create_average_call(average_link3)
+
     export_to_excel(get_average_json0, "datafile_average0.xlsx")
-    export_to_excel(get_average_json1, "datafile_average1.xlsx")
-    export_to_excel(get_average_json2, "datafile_average2.xlsx")
-    export_to_excel(get_average_json3, "datafile_average3.xlsx")
-
-    # daily_call = f"{daily_prices}{items}{time_scale}"
-
-    # get_daily_json = create_call(daily_call)
-
-    # export_to_excel(get_daily_json, "datafile_last_days.xlsx")
-    response = []
-
-    # plt.plot(x, y)
-    # plt.xlabel('X-axis')
-    # plt.ylabel('Y-axis')
-    # plt.title("A simple line graph")
-    # plt.show()
 
 
 def create_item_list(item_list, tier, enchant):
     query_item_list = ""
     for item_name in item_list:
-        if item_name == item_list[len(item_list)-1]:
+        if item_name == item_list[len(item_list) - 1]:
             query_item_list = f"{query_item_list}{tier}_{item_name}{enchant}"
         else:
             query_item_list = f"{query_item_list}{tier}_{item_name}{enchant},"
