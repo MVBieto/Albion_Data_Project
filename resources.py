@@ -24,17 +24,7 @@ morganasRest_index = "0008"
 locations = f"?locations={thetford_index}, {martlock_index},{lymhurst_index},{bridgewatch_index},{fortSterling_index},{black_market_index}, {caerleon_market_index}, {arthursRest_index},{merlynsRest_index},{morganasRest_index}"
 qualities = "&qualities=1"
 
-# def tier(unit):
-#     if unit == 0:
-#         return ' '
-#     elif unit == 1:
-#         return "_LEVEL1@1"
-#     elif unit == 2:
-#         return "_LEVEL2@2"
-#     elif unit == 3:
-#         return "_LEVEL3@3"
-#     elif unit == 4:
-#         return "_LEVEL4@4"
+
 
 
 level = 3
@@ -44,8 +34,37 @@ level = 3
 
 # https://west.albion-online-data.com/api/v2/stats/view/T4_BAG,T5_BAG?locations=Caerleon,Bridgewatch&qualities=2
 
+items = [
+    "T2_CLOTH",
+    "T3_CLOTH",
+    "T4_CLOTH",
+    "T5_CLOTH",
+    "T6_CLOTH",
+    "T7_CLOTH",
+    "T7_CLOTH_LEVEL1@1",
+    "T7_CLOTH_LEVEL2@2",
+    "T7_CLOTH_LEVEL3@3",
+    "T7_CLOTH_LEVEL4@4",
+    "T8_CLOTH",
+    "T8_CLOTH_LEVEL1@1",
+    "T8_CLOTH_LEVEL2@2",
+    "T8_CLOTH_LEVEL3@3",
+    "T8_CLOTH_LEVEL4@4"
+]
+
+
+def object_selector(items):
+    final_object_list_string = None
+    for item in items:
+        if not None:
+            final_object_list_string = f"{final_object_list_string},{item}"
+
+    return final_object_list_string
+
+
+
 def run_script():
-    average_link0 = f"{main_link}T6_MAIN_FIRESTAFF_KEEPER@1{locations}"
+    average_link0 = f"{main_link}{object_selector(items)}{locations}"
 
     get_average_json0 = create_average_call(average_link0)
 
